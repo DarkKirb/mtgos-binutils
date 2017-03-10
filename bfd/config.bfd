@@ -465,6 +465,11 @@ case "${targ}" in
     targ_defvec=arm_elf32_le_vec
     targ_selvecs=arm_elf32_be_vec
     ;;
+  arm-*-mtgos*)
+    targ_defvec=arm_elf32_le_vec
+    targ_selvecs=
+    targ64_selvecx=
+    ;;
 
   avr-*-*)
     targ_defvec=avr_elf32_vec
@@ -877,6 +882,16 @@ case "${targ}" in
   i[3-7]86-*-chaos)
     targ_defvec=i386_elf32_vec
     targ_selfvecs="iamcu_elf32_vec i386chaos_vec"
+    ;;
+  i[3-7]86-*-mtgos*)
+    targ_defvec=i386_elf32_vec
+    targ_selfvecs=
+    targ64_selvecs=x86_64_elf64_vec
+    ;;
+  x86_64-*-mtgos*)
+    targ_defvec=x86_64_elf64_vec
+    targ_selvecs=i386_elf32_vec
+    want64=true
     ;;
 
   i860-*-mach3* | i860-*-osf1* | i860-*-coff*)
@@ -1434,6 +1449,11 @@ case "${targ}" in
   powerpcle-*-pe | powerpcle-*-winnt* | powerpcle-*-cygwin*)
     targ_defvec=powerpc_pe_le_vec
     targ_selvecs="powerpc_pei_le_vec powerpc_pei_vec powerpc_pe_le_vec powerpc_pe_vec"
+    ;;
+  powerpc-*-mtgos*)
+    targ_defvec=powerpc_elf32_vec
+    targ_selvecs=
+    targ64_selvecs=
     ;;
 
 #ifdef BFD64

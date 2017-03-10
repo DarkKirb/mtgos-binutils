@@ -155,6 +155,10 @@ arm*-*-conix*)		targ_emul=armelf ;;
 arm*-*-fuchsia*)	targ_emul=armelf_fuchsia
 			targ_extra_emuls="armelfb_fuchsia armelf armelfb"
 			;;
+arm-*-mtgos*)
+                targ_emul=armelf_mtgos
+                targ_extra_emuls="elf_i386_mtgos elf32ppc_mtgos elf_i386 elf32ppc"
+                targ64_extra_emuls="elf_x86_64_mtgos elf_x86_64";;
 avr-*-*)		targ_emul=avr2
 			targ_extra_emuls="avr1 avr25 avr3 avr31 avr35 avr4 avr5 avr51 avr6 avrxmega1 avrxmega2 avrxmega3 avrxmega4 avrxmega5 avrxmega6 avrxmega7 avrtiny"
 			;;
@@ -391,6 +395,15 @@ x86_64-*-nacl*)		targ_emul=elf32_x86_64_nacl
 			targ_extra_libpath=$targ_extra_emuls
 			tdir_elf_i386_nacl=`echo ${targ_alias} | sed -e 's/x86_64/i386/'`
 			;;
+i[3-7]86-*-mtgos*)
+            targ_emul=elf_i386_mtgos
+            targ_extra_emuls="armelf_mtgos armelf elf32ppc_mtgos elf32ppc elf_i386 "
+            targ64_extra_emuls="elf_x86_64_mtgos elf_x86_64"
+            ;;
+x86_64-*-mtgos*)
+            targ_emul=elf_x86_64_mtgos
+            targ_extra_emuls="armelf_mtgos armelf elf32ppc_mtgos elf32ppc elf_i386_mtgos elf_i386 elf_x86_64"
+            ;;
 i860-*-coff)		targ_emul=coff_i860 ;;
 i860-stardent-sysv4* | i860-stardent-elf*)
 			targ_emul=elf32_i860
@@ -684,6 +697,11 @@ powerpc-*-aix*)		targ_emul=aixppc ;;
 powerpc-*-beos*)	targ_emul=aixppc ;;
 powerpc-*-windiss*)	targ_emul=elf32ppcwindiss ;;
 powerpc-*-lynxos*)	targ_emul=ppclynx ;;
+powerpc-*-mtgos*)
+                    targ_emul=elf32ppc_mtgos
+                    targ_extra_emuls="armelf_mtgos elf_i386_mtgos"
+                    targ64_extra_emuls="elf_x86_64_mtgos"
+                    ;;
 riscv32*-*-*)		targ_emul=elf32lriscv
 			targ_extra_emuls="elf64lriscv"
 			targ_extra_libpath=$targ_extra_emuls ;;

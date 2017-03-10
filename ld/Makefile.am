@@ -186,6 +186,7 @@ ALL_EMULATION_SOURCES = \
 	earmelf_nbsd.c \
 	earmelf_phoenix.c \
 	earmelf_vxworks.c \
+	earmelf_mtgos.c \
 	earmelfb.c \
 	earmelfb_fbsd.c \
 	earmelfb_fuchsia.c \
@@ -280,6 +281,7 @@ ALL_EMULATION_SOURCES = \
 	eelf32ppcsim.c \
 	eelf32ppcvxworks.c \
 	eelf32ppcwindiss.c \
+	eelf32ppc_mtgos.c \
 	eelf32lriscv.c \
 	eelf32rl78.c \
 	eelf32rx.c \
@@ -302,6 +304,7 @@ ALL_EMULATION_SOURCES = \
 	eelf_i386_sol2.c \
 	eelf_i386_vxworks.c \
 	eelf_iamcu.c \
+	eelf_i386_mtgos.c \
 	eelf_s390.c \
 	egld960.c \
 	egld960coff.c \
@@ -515,6 +518,7 @@ ALL_64_EMULATION_SOURCES = \
 	eelf_x86_64_fbsd.c \
 	eelf_x86_64_nacl.c \
 	eelf_x86_64_sol2.c \
+	eelf_x86_64_mtgos.c \
 	ehppa64linux.c \
 	ei386pep.c \
 	emmo.c \
@@ -837,6 +841,9 @@ earmelfb_nbsd.c: $(srcdir)/emulparams/armelfb_nbsd.sh \
   $(srcdir)/emulparams/armelf.sh \
   $(ELF_DEPS) $(srcdir)/emultempl/armelf.em \
   $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+
+earmelf_mtgos.c: $(srcdir)/emulparams/armelf_mtgos.sh $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+	${GENSCRIPTS} armelf_mtgos "$(tdir_armelf_mtgos)"
 
 earmnbsd.c:	$(srcdir)/emulparams/armnbsd.sh \
   $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/aout.sc ${GEN_DEPENDS}
@@ -1285,6 +1292,9 @@ eelf32ppcvxworks.c: $(srcdir)/emulparams/elf32ppcvxworks.sh \
 eelf32ppcwindiss.c: $(srcdir)/emulparams/elf32ppcwindiss.sh \
   $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
 
+eelf32ppc_mtgos.c: $(srcdir)/emulparams/elf32ppc_mtgos.sh $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+	${GENSCRIPTS} elf32ppc_mtgos "$(tdir_elf32ppc_mtgos)"
+
 eelf32rl78.c: $(srcdir)/emulparams/elf32rl78.sh \
   $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
 
@@ -1360,8 +1370,13 @@ eelf_i386_vxworks.c: $(srcdir)/emulparams/elf_i386_vxworks.sh \
   $(srcdir)/emulparams/vxworks.sh $(srcdir)/emultempl/vxworks.em \
   $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
 
+eelf_i386_mtgos.c: $(srcdir)/emulparams/elf_i386_mtgos.sh $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+	${GENSCRIPTS} elf_i386_mtgos "$(tdir_elf_i386_mtgos)"
+
+
 eelf_iamcu.c: $(srcdir)/emulparams/elf_iamcu.sh \
   $(ELF_X86_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+
 
 eelf_s390.c: $(srcdir)/emulparams/elf_s390.sh \
   $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
@@ -2050,6 +2065,9 @@ eelf_x86_64_sol2.c: $(srcdir)/emulparams/elf_x86_64_sol2.sh \
   $(srcdir)/emulparams/solaris2.sh \
   $(srcdir)/emultempl/solaris2.em \
   $(ELF_X86_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+
+eelf_x86_64_myos.c: $(srcdir)/emulparams/elf_x86_64_mtgos.sh $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+	${GENSCRIPTS} elf_x86_64_mtgos "$(tdir_elf_x86_64_mtgos)"
 
 ehppa64linux.c: $(srcdir)/emulparams/hppa64linux.sh \
   $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
